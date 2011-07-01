@@ -8,7 +8,7 @@
  */
 
 function motp_validator($otp, $secret, $pin) {
-    $tolerate = 3 * 180;
+    $tolerate = 3 * 60;
     $epoch1 = time() - $tolerate;
     $epoch2 = $epoch1 + 2 * $tolerate;
 
