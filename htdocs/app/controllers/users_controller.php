@@ -20,6 +20,12 @@ class UsersController extends AppController {
     }
 
     function add() {
+        if (!empty($this->data)) {
+            if ($this->User->save($this->data)) {
+                $this->Session->setFlash(__('User added', true));
+                $this->redirect(array('action' => 'index'));
+            }
+        }
     }
 
     function edit($id) {
