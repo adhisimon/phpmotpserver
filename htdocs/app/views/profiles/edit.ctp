@@ -1,8 +1,8 @@
 <?php
 /**
- * view file of /users/add
+ * view file of /profiles/add
  *
- * view file to add user
+ * view file to add profile
  *
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
@@ -13,10 +13,10 @@
 
     <?php
         echo $html->link(
-            $this->data['User']['username'],
+            $this->data['Profile']['name'],
             array(
                 'action' => 'view',
-                $this->data['User']['id'],
+                $this->data['Profile']['id'],
             )
         );
     ?>
@@ -25,9 +25,9 @@
 
 <?php
 
-echo $this->Form->create('User');
+echo $this->Form->create('Profile');
 
-echo $this->Form->input('username');
+echo $this->Form->input('name');
 echo $this->Form->input('secret');
 echo $this->Form->input('pin');
 echo $this->Form->input('offset');
@@ -39,7 +39,7 @@ echo $this->Form->end(__('Save', true));
 
 <?php
     echo $html->link(
-        __('Back to list of users', true),
+        __('Back to list of profiles', true),
         array(
             'action' => 'index'
         )

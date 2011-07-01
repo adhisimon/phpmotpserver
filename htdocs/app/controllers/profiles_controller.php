@@ -1,43 +1,43 @@
 <?php
 /**
- * Implementation file of UsersController
+ * Implementation file of ProfilesController
  *
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 
 /**
- * UsersController is a controller to manage users
+ * ProfilesController is a controller to manage profiles
  *
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
-class UsersController extends AppController {
+class ProfilesController extends AppController {
 
     function index() {
-        $users = $this->paginate('User');
-        $this->set(compact('users'));
+        $profiles = $this->paginate('Profile');
+        $this->set(compact('profiles'));
     }
 
     function add() {
         if (!empty($this->data)) {
-            if ($this->User->save($this->data)) {
-                $this->Session->setFlash(__('User added', true));
+            if ($this->Profile->save($this->data)) {
+                $this->Session->setFlash(__('Profile added', true));
                 $this->redirect(array('action' => 'index'));
             }
         }
     }
 
     function edit($id) {
-        $this->User->id = $id;
+        $this->Profile->id = $id;
 
         if (empty($this->data)) {
 
-            $this->data = $this->User->read();
+            $this->data = $this->Profile->read();
 
         } else {
 
-            if ($this->User->save($this->data)) {
+            if ($this->Profile->save($this->data)) {
                 $this->Session->setFlash(__('Data has been saved', true));
                 $this->redirect(array('action' => 'view', $id));
             }
@@ -46,13 +46,13 @@ class UsersController extends AppController {
     }
 
     function view($id) {
-        $this->User->id = $id;
-        $this->set('user', $this->User->read());
+        $this->Profile->id = $id;
+        $this->set('profile', $this->Profile->read());
     }
 
     function delete($id) {
-        if ($this->User->delete($id)) {
-            $this->Session->setFlash(__('User has been deleted', true));
+        if ($this->Profile->delete($id)) {
+            $this->Session->setFlash(__('Profile has been deleted', true));
         } else {
             $this->Session->setFlash(__('Delete failed', true));
         }

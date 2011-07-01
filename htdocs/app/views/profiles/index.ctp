@@ -1,40 +1,40 @@
 <?php
 /**
- * view of /users/index
+ * view of /profiles/index
  *
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 ?>
 
-<h2><?php echo __('List of Users', true); ?></h2>
+<h2><?php echo __('List of Profiles', true); ?></h2>
 
 <table>
     <tr>
-        <th><?php echo $this->Paginator->sort(__('Username', true), 'User.username'); ?></th>
-        <th><?php echo $this->Paginator->sort(__('Created', true), 'User.created'); ?></th>
-        <th><?php echo $this->Paginator->sort(__('Modified', true), 'User.modified'); ?></th>
+        <th><?php echo $this->Paginator->sort(__('Profilename', true), 'Profile.name'); ?></th>
+        <th><?php echo $this->Paginator->sort(__('Created', true), 'Profile.created'); ?></th>
+        <th><?php echo $this->Paginator->sort(__('Modified', true), 'Profile.modified'); ?></th>
         <th>&nbsp;</th>
     </tr>
 
-    <?php foreach ($users as $user): ?>
+    <?php foreach ($profiles as $profile): ?>
 
     <tr>
         <td>
 
             <?php
                 echo $html->link(
-                    $user['User']['username'],
+                    $profile['Profile']['name'],
                     array(
                         'action' => 'view',
-                        $user['User']['id']
+                        $profile['Profile']['id']
                     )
                 );
             ?>
 
         </td>
-        <td><?php echo $user['User']['created']; ?></td>
-        <td><?php echo $user['User']['modified']; ?></td>
+        <td><?php echo $profile['Profile']['created']; ?></td>
+        <td><?php echo $profile['Profile']['modified']; ?></td>
 
         <td>
 
@@ -44,7 +44,7 @@
                     __('Detail', true),
                     array(
                         'action' => 'view',
-                        $user['User']['id']
+                        $profile['Profile']['id']
                     )
                 );
 
@@ -54,7 +54,7 @@
                     __('Edit', true),
                     array(
                         'action' => 'edit',
-                        $user['User']['id']
+                        $profile['Profile']['id']
                     )
                 );
 
@@ -64,12 +64,12 @@
                     __('Delete', true),
                     array(
                         'action' => 'delete',
-                        $user['User']['id']
+                        $profile['Profile']['id']
                     ),
                     array(),
                     sprintf(
                         __('Are you sure you want to delete "%s"?', true),
-                        $user['User']['username']
+                        $profile['Profile']['name']
                     )
                 );
 
@@ -96,7 +96,7 @@
 <br /><br />
 <?php
     echo $html->link(
-        __('Add a new user', true),
+        __('Add a new profile', true),
         array(
             'action' => 'add'
         )
