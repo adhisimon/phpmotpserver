@@ -17,8 +17,8 @@ echo $this->Form->create('Profile');
 
 echo $this->Form->input('name');
 echo $this->Form->input('secret');
-echo $this->Form->input('pin');
-echo $this->Form->input('offset');
+echo $this->Form->input('pin', array('default' => '1111'));
+echo $this->Form->input('offset', array('default' => 0));
 
 echo $this->Form->end(__('Save', true));
 ?>
