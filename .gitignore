@@ -3,3 +3,4 @@ htdocs/app/tmp/logs/debug.log
 htdocs/app/config/core.local.php
 htdocs/app/config/database.php
 *.swp
+*~
