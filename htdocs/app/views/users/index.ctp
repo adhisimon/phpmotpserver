@@ -51,6 +51,16 @@
                 echo ' ';
 
                 echo $html->link(
+                    __('Edit', true),
+                    array(
+                        'action' => 'edit',
+                        $user['User']['id']
+                    )
+                );
+
+                echo ' ';
+
+                echo $html->link(
                     __('Delete', true),
                     array(
                         'action' => 'delete',
