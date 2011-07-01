@@ -69,6 +69,9 @@ class ProfilesController extends AppController {
      */
     function validator() {
 
+        # first, run garbage collector
+        $this->UsedToken->garbageCollector();
+
         # check if requested by ordinary web browser or not
         if ($this->RequestHandler->accepts('text')) {
             $this->layout = 'ajax';
