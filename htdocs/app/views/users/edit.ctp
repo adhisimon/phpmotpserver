@@ -9,7 +9,19 @@
  */
 ?>
 
-<h2><?php echo sprintf(__('Edit User: %s', true), $this->data['User']['username']); ?></h2>
+<h2>
+
+    <?php
+        echo $html->link(
+            $this->data['User']['username'],
+            array(
+                'action' => 'view',
+                $this->data['User']['id'],
+            )
+        );
+    ?>
+
+</h2>
 
 <?php
 
@@ -21,4 +33,15 @@ echo $this->Form->input('pin');
 echo $this->Form->input('offset');
 
 echo $this->Form->end(__('Save', true));
+?>
+
+<br/>
+
+<?php
+    echo $html->link(
+        __('Back to list of users', true),
+        array(
+            'action' => 'index'
+        )
+    );
 ?>
