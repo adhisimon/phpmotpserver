@@ -1,2 +1,3 @@
 htdocs/app/tmp/cache/*/cake_*
 htdocs/app/tmp/logs/debug.log
+htdocs/app/config/database.php
