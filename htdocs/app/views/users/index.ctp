@@ -20,7 +20,19 @@
     <?php foreach ($users as $user): ?>
 
     <tr>
-        <td><?php echo $user['User']['username']; ?></td>
+        <td>
+
+            <?php
+                echo $html->link(
+                    $user['User']['username'],
+                    array(
+                        'action' => 'view',
+                        $user['User']['id']
+                    )
+                );
+            ?>
+
+        </td>
         <td><?php echo $user['User']['created']; ?></td>
         <td><?php echo $user['User']['modified']; ?></td>
 
