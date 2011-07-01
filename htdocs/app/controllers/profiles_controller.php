@@ -117,7 +117,12 @@ class ProfilesController extends AppController {
         } elseif ($profile) {
             $offset = $profile['Profile']['offset'];
         } else {
-            $offset = '';
+            $offset = '0';
+        }
+
+        # check if we've been called rightly
+        if (empty($secret) or empty($pin) or empty($otp)) {
+            $this->set('show_help', true);
         }
 
         App::Import('Lib', 'motp');
