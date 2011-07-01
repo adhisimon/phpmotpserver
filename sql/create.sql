@@ -36,7 +36,7 @@ CREATE TABLE `profiles` (
   `modified` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,10 +47,30 @@ DROP TABLE IF EXISTS `used_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `used_tokens` (
-  `token` varchar(6) NOT NULL,
+  `name` varchar(6) NOT NULL,
   `created` datetime NOT NULL,
+  PRIMARY KEY  (`name`),
   KEY `created` (`created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `admin` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -62,4 +82,4 @@ CREATE TABLE `used_tokens` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-02  0:35:45
+-- Dump completed on 2011-07-02  2:15:41

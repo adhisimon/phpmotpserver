@@ -15,6 +15,7 @@
 class ProfilesController extends AppController {
 
     var $components = array('RequestHandler');
+    var $uses = array('Profile', 'UsedToken');
 
     function index() {
         $profiles = $this->paginate('Profile');
@@ -68,6 +69,24 @@ class ProfilesController extends AppController {
      */
     function validator() {
 
+        # check if requested by ordinary web browser or not
+        if ($this->RequestHandler->accepts('text')) {
+            $this->layout = 'ajax';
+        }
+
+        if (!empty($this->params['named']['otp'])) {
+            $otp = $this->params['named']['otp'];
+        } else {
+            $otp = '';
+        }
+
+        # check if token has been used
+        $used_token = $this->UsedToken->findByName($otp);
+        if ($used_token) {
+            $this->set('result', false);
+            return false;
+        }
+
         if (!empty($this->params['named']['username'])) {
             $profile = $this->Profile->findByName($this->params['named']['username']);
         } else {
@@ -98,19 +117,17 @@ class ProfilesController extends AppController {
             $offset = '';
         }
 
-        if (!empty($this->params['named']['otp'])) {
-            $otp = $this->params['named']['otp'];
-        } else {
-            $otp = '';
-        }
-
         App::Import('Lib', 'motp');
         $result = motp_validator($otp, $secret, $pin);
-        $this->set('result', $result);
 
-        if ($this->RequestHandler->accepts('text')) {
-            $this->layout = 'ajax';
+        if ($result) {
+            // store otp to UsedToken so it can only be used one time
+            $this->UsedToken->create();
+            $this->UsedToken->saveField('name', $otp);
         }
+
+        $this->set('result', $result);
+        return $result;
     }
 
 }
