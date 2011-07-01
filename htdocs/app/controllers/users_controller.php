@@ -29,6 +29,20 @@ class UsersController extends AppController {
     }
 
     function edit($id) {
+        $this->User->id = $id;
+
+        if (empty($this->data)) {
+
+            $this->data = $this->User->read();
+
+        } else {
+
+            if ($this->User->save($this->data)) {
+                $this->Session->setFlash(__('Data has been saved', true));
+                $this->redirect(array('action' => 'view', $id));
+            }
+
+        }
     }
 
     function view($id) {
