@@ -46,6 +46,8 @@ class UsersController extends AppController {
     }
 
     function view($id) {
+        $this->User->id = $id;
+        $this->set('user', $this->User->read());
     }
 
     function delete($id) {
