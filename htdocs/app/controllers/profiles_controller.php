@@ -14,6 +14,8 @@
  */
 class ProfilesController extends AppController {
 
+    var $components = array('RequestHandler');
+
     function index() {
         $profiles = $this->paginate('Profile');
         $this->set(compact('profiles'));
@@ -105,6 +107,10 @@ class ProfilesController extends AppController {
         App::Import('Lib', 'motp');
         $result = motp_validator($otp, $secret, $pin);
         $this->set('result', $result);
+
+        if ($this->RequestHandler->accepts('text')) {
+            $this->layout = 'ajax';
+        }
     }
 
 }

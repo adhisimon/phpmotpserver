@@ -5,5 +5,5 @@
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
-?>
-Result: <?php echo $result ? 'OK' : 'NOT OK'; ?>
+
+echo $result ? 'OK' : 'NOT OK';
