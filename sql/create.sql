@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `used_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `used_tokens` (
-  `name` varchar(6) NOT NULL,
+  `name` char(6) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY  (`name`),
   KEY `created` (`created`)
@@ -82,4 +82,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-02  2:15:41
+-- Dump completed on 2011-07-02  4:10:37
