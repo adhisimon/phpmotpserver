@@ -11,7 +11,7 @@
 
 <table>
     <tr>
-        <th><?php echo $this->Paginator->sort(__('Profilename', true), 'Profile.name'); ?></th>
+        <th><?php echo $this->Paginator->sort(__('Name', true), 'Profile.name'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Created', true), 'Profile.created'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Modified', true), 'Profile.modified'); ?></th>
         <th>&nbsp;</th>
