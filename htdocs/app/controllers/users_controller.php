@@ -51,6 +51,14 @@ class UsersController extends AppController {
     }
 
     function delete($id) {
+        if ($this->User->delete($id)) {
+            $this->Session->setFlash(__('User has been deleted', true));
+        } else {
+            $this->Session->setFlash(__('Delete failed', true));
+        }
+
+        $this->redirect(array('action' => 'index'));
+
     }
 
 }
