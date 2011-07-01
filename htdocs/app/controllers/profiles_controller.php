@@ -61,4 +61,50 @@ class ProfilesController extends AppController {
 
     }
 
+    /**
+     * function to validate OTP
+     */
+    function validator() {
+
+        if (!empty($this->params['named']['username'])) {
+            $profile = $this->Profile->findByName($this->params['named']['username']);
+        } else {
+            $profile = array();
+        }
+
+        if (!empty($this->params['named']['secret'])) {
+            $secret = $this->params['named']['secret'];
+        } elseif ($profile) {
+            $secret = $profile['Profile']['secret'];
+        } else {
+            $secret = '';
+        }
+
+        if (!empty($this->params['named']['pin'])) {
+            $pin = $this->params['named']['pin'];
+        } elseif ($profile) {
+            $pin = $profile['Profile']['pin'];
+        } else {
+            $pin = '';
+        }
+
+        if (!empty($this->params['named']['offset'])) {
+            $offset = $this->params['named']['offset'];
+        } elseif ($profile) {
+            $offset = $profile['Profile']['offset'];
+        } else {
+            $offset = '';
+        }
+
+        if (!empty($this->params['named']['otp'])) {
+            $otp = $this->params['named']['otp'];
+        } else {
+            $otp = '';
+        }
+
+        App::Import('Lib', 'motp');
+        $result = motp_validator($otp, $secret, $pin);
+        $this->set('result', $result);
+    }
+
 }
