@@ -7,7 +7,7 @@
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 
-function motp($secret, $pin) {
+function motp($otp, $secret, $pin) {
     $tolerate = 3 * 180;
     $epoch1 = time() - $tolerate;
     $epoch2 = $epoch1 + 2 * $tolerate;
