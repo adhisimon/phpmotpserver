@@ -14,6 +14,7 @@
         <th><?php echo $this->Paginator->sort(__('Username', true), 'User.username'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Created', true), 'User.created'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Modified', true), 'User.modified'); ?></th>
+        <th>&nbsp;</th>
     </tr>
 
     <?php foreach ($users as $user): ?>
@@ -22,6 +23,37 @@
         <td><?php echo $user['User']['username']; ?></td>
         <td><?php echo $user['User']['created']; ?></td>
         <td><?php echo $user['User']['modified']; ?></td>
+
+        <td>
+
+            <?php
+
+                echo $html->link(
+                    __('Detail', true),
+                    array(
+                        'action' => 'view',
+                        $user['User']['id']
+                    )
+                );
+
+                echo ' ';
+
+                echo $html->link(
+                    __('Delete', true),
+                    array(
+                        'action' => 'delete',
+                        $user['User']['id']
+                    ),
+                    array(),
+                    sprintf(
+                        __('Are you sure you want to delete "%s"?', true),
+                        $user['User']['username']
+                    )
+                );
+
+            ?>
+
+        </td>
     </tr>
 
     <?php endforeach; ?>
