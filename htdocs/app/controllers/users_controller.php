@@ -148,4 +148,14 @@ class UsersController extends AppController {
         $this->redirect($this->Auth->logout());
     }
 
+    /**
+     * action to show groups where a user has joined
+     * @params int $user_id user to search
+     */
+    function groups($user_id) {
+        $this->User->id = $user_id;
+        $user = $this->User->read();
+        debug($user);
+    }
+
 }

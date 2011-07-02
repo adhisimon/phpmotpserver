@@ -13,9 +13,7 @@
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 class Group extends AppModel {
-    var $hasMany = array(
-        'GroupUser' =>  array(
-            'dependent' => true,
-        ),
+    var $hasAndBelongsToManyMany = array(
+        'User'
     );
 }

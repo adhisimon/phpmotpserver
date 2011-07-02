@@ -21,9 +21,7 @@ class User extends AppModel {
         )
     );
 
-    var $hasMany = array(
-        'GroupUser' =>  array(
-            'dependent' => true,
-        ),
+    var $hasAndBelongsToMany = array(
+        'Group'
     );
 }
