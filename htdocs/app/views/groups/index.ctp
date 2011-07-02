@@ -41,7 +41,7 @@
                 echo $html->link(
                     __('Detail', true),
                     array(
-                        'action' => 'view',
+                        'action' => 'users',
                         $group['Group']['id']
                     )
                 );
