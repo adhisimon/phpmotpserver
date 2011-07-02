@@ -18,7 +18,7 @@
     echo '<br/>';
 
     foreach ($group['User'] as $user) {
-        echo ' ';
+        echo ' [ ';
 
         echo $html->link(
             $user['username'],
@@ -28,6 +28,26 @@
                 $user['id']
             )
         );
+
+        echo ' [';
+        echo $html->link(
+            'x',
+            array(
+                'controller' => 'groups_users',
+                'action' => 'delete',
+                $group['Group']['id'],
+                $user['id']
+            ),
+            null,
+            sprintf(
+                __('Are you sure you want to leave %s from %s group?', true),
+                $user['username'],
+                $group['Group']['name']
+            )
+        );
+        echo '] ';
+
+        echo ' ] ';
     }
 ?>
 
