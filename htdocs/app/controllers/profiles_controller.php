@@ -18,12 +18,32 @@ class ProfilesController extends AppController {
     var $uses = array('Profile', 'UsedToken');
 
     function index() {
-        $profiles = $this->paginate('Profile');
+        $user_id = $this->Auth->User('id');
+        $_groups = $this->requestAction("/users/groupsList/$user_id");
+
+        foreach ($_groups as $group_id => $group) {
+            $groups[] = $group_id;
+        }
+
+        if (!empty($this->params['named']['group_id'])) {
+            $groups = array_intersect($groups, array($this->params['named']['group_id']));
+        }
+
+        $conditions['group_id'] = $groups;
+
+        $profiles = $this->paginate('Profile', $conditions);
         $this->set(compact('profiles'));
     }
 
     function add() {
-        if (!empty($this->data)) {
+
+        if (empty($this->data)) {
+
+            $user_id = $this->Auth->User('id');
+            $groups = $this->requestAction("/users/groupsList/$user_id");
+            $this->set('groups', $groups);
+
+        } else {
             if ($this->Profile->save($this->data)) {
                 $this->Session->setFlash(__('Profile added', true));
                 $this->redirect(array('action' => 'index'));
@@ -37,6 +57,11 @@ class ProfilesController extends AppController {
         if (empty($this->data)) {
 
             $this->data = $this->Profile->read();
+
+            $user_id = $this->Auth->User('id');
+            $groups = $this->requestAction("/users/groupsList/$user_id");
+            $this->set('groups', $groups);
+
 
         } else {
 

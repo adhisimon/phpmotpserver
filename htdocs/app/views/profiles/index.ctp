@@ -12,6 +12,7 @@
 <table>
     <tr>
         <th><?php echo $this->Paginator->sort(__('Name', true), 'Profile.name'); ?></th>
+        <th><?php echo $this->Paginator->sort(__('Group', true), 'Group.name'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Created', true), 'Profile.created'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Modified', true), 'Profile.modified'); ?></th>
         <th>&nbsp;</th>
@@ -28,6 +29,20 @@
                     array(
                         'action' => 'view',
                         $profile['Profile']['id']
+                    )
+                );
+            ?>
+
+        </td>
+        <td>
+
+            <?php
+                echo $html->link(
+                    $profile['Group']['name'],
+                    array(
+                        'controller' => 'groups',
+                        'action' => 'view',
+                        $profile['Group']['id']
                     )
                 );
             ?>

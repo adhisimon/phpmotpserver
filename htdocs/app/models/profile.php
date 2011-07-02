@@ -31,4 +31,11 @@ class Profile extends AppModel {
             'message' => 'Please an integer as an "Offset"'
         ),
     );
+
+    /**
+     * @var array belongs to relation
+     */
+    var $belongsTo = array(
+       'Group'
+    );
 }

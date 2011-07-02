@@ -159,6 +159,14 @@ class UsersController extends AppController {
         return $user['Group'];
     }
 
+    function groupsList($user_id) {
+        $groups = $this->groups($user_id);
+        foreach ($groups as $group) {
+            $retval[$group['id']] = $group['name'];
+        }
+        return $retval;
+    }
+
     /**
      * action to join another group
      */

@@ -37,3 +37,15 @@
         );
     }
 ?>
+
+<?php
+    echo '<br/>';
+    echo $html->link(
+        __('View list of related OTP Profiles', true),
+        array(
+            'controller' => 'profiles',
+            'action' => 'index',
+            'group_id' => $group['Group']['id']
+        )
+    );
+?>

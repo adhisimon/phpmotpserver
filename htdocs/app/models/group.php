@@ -19,4 +19,8 @@ class Group extends AppModel {
     var $hasAndBelongsToMany = array(
         'User'
     );
+
+    var $hasMany = array(
+        'Profile'
+    );
 }
