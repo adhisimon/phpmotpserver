@@ -28,3 +28,20 @@
         );
     }
 ?>
+
+<?php
+    if ($session->read('Auth.User.admin')) {
+
+        echo "<br/><br/>";
+
+        echo $html->link(
+            __('Join to another group', true),
+            array(
+                'controller' => 'groups',
+                'action' => 'join',
+                'user_id' => $user['User']['id']
+            )
+        );
+
+    }
+?>
