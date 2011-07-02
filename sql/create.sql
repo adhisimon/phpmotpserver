@@ -37,6 +37,24 @@ CREATE TABLE `groups` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `groups_users`
+--
+
+DROP TABLE IF EXISTS `groups_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groups_users` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `group_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `group_user` (`group_id`,`user_id`),
+  KEY `user_group` (`user_id`,`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `profiles`
 --
 
@@ -46,13 +64,15 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE `profiles` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
-  `secret` varchar(32) NOT NULL,
+  `secret` varchar(16) NOT NULL,
   `pin` char(4) NOT NULL default '1111',
   `offset` int(11) NOT NULL default '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `group_id` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `username` (`name`)
+  UNIQUE KEY `name` (`name`),
+  KEY `group_id` (`group_id`,`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,4 +119,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-02 16:50:32
+-- Dump completed on 2011-07-03  2:22:42
