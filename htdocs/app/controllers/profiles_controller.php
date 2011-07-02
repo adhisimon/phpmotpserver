@@ -149,4 +149,8 @@ class ProfilesController extends AppController {
         return $result;
     }
 
+    function beforeFilter() {
+        $this->Auth->allow('validator');
+    }
+
 }
