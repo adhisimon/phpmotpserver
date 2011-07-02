@@ -106,4 +106,20 @@ class GroupsController extends AppController {
         $this->set('group', $group);
         return $group['User'];
     }
+
+    /**
+     * action to add a user as a member
+     */
+    function addUser($id = null) {
+        if (!$this->Auth->User('admin')) {
+            $this->Session->setFlash($this->Auth->authError);
+            $this->redirect('/');
+        }
+
+        $this->Group->id = $id;
+        $group = $this->Group->read();
+        $this->set('group', $group);
+        $this->set('users', $this->Group->User->find('list'));
+    }
+
 }

@@ -40,8 +40,8 @@
             __('Add another user as a member', true),
             array(
                 'controller' => 'groups',
-                'action' => 'join',
-                'group_id' => $group['Group']['id']
+                'action' => 'addUser',
+                $group['Group']['id']
             )
         );
 
