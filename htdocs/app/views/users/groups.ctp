@@ -15,7 +15,6 @@
         $user['User']['username']
     );
 
-
     foreach ($user['Group'] as $group) {
         echo ' ';
 
