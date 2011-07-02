@@ -89,7 +89,7 @@ class GroupsController extends AppController {
      * @params int $group_id group to join
      * @params int $user_id user who wants to join
      */
-    function join($group_id, $user_id) {
+    function join() {
         if (!$this->Auth->User('admin')) {
             $this->Session->setFlash($this->Auth->authError);
             $this->redirect(array('action' => 'view', $group_id));
