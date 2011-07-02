@@ -20,6 +20,11 @@ class UsersController extends AppController {
      * action to show index of available users registered on the system
      */
     function index() {
+        if (!$this->Auth->User('admin')) {
+            $this->Session->setFlash($this->Auth->authError);
+            $this->redirect('/');
+        }
+
         $users = $this->paginate('User');
         $this->set(compact('users'));
     }
@@ -70,6 +75,10 @@ class UsersController extends AppController {
             $id = $this->Auth->User('id');
         }
 
+        if (!$this->Auth->User('admin') and ($id != $this->Auth->User('id'))) {
+            $this->redirect(array('action' => 'view', $this->Auth->User('id')));
+        }
+
         $this->User->id = $id;
         $this->set('user', $this->User->read());
     }
@@ -79,6 +88,11 @@ class UsersController extends AppController {
      * @params int $id user to delete
      */
     function delete($id) {
+        if (!$this->Auth->User('admin')) {
+            $this->Session->setFlash($this->Auth->authError);
+            $this->redirect('/');
+        }
+
         if ($this->User->delete($id)) {
             $this->Session->setFlash(__('User has been deleted', true));
         } else {
@@ -94,6 +108,11 @@ class UsersController extends AppController {
      */
     function editPassword($id) {
         $this->User->id = $id;
+
+        if (!$this->Auth->User('admin') and ($id != $this->Auth->User('id'))) {
+            $this->redirect(array('action' => 'editPassword', $this->Auth->User('id')));
+        }
+
         $user = $this->User->read();
         $this->set('user', $user);
 
@@ -104,9 +123,6 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__("Password didn't match", true));
                 return false;
             }
-
-            #$hashed_password = $this->Auth->hashPassword($this->data);
-            #debug($hashed_password); die;
 
             $this->User->saveField('password', $this->Auth->password($this->data['User']['password']));
 

@@ -28,14 +28,15 @@
     );
 ?>
 
-
-<br/>
 <?php
-    echo $html->link(
-        __('Back to list of users', true),
-        array(
-            'action' => 'index'
-        )
-    );
+    if ($session->read('Auth.User.admin')) {
+        echo '<br/>';
+        echo $html->link(
+            __('Back to list of users', true),
+            array(
+                'action' => 'index'
+            )
+        );
+    }
 ?>
 

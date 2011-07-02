@@ -32,13 +32,24 @@ echo $this->Form->end(__('Save', true));
 
 ?>
 
+<?php
+    if ($session->read('Auth.User.admin')) {
+        echo '<br/>';
+        echo $html->link(
+            __('Back to list of users', true),
+            array(
+                'action' => 'index'
+            )
+        );
+    }
+?>
+
 <br/>
 <?php
     echo $html->link(
-        __('Back to list of users', true),
+        __('Back to your profile', true),
         array(
-            'action' => 'index'
+            'action' => 'view'
         )
     );
 ?>
-
