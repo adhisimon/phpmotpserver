@@ -1,26 +1,18 @@
 <?php
 /**
- * Implementation of User model
+ * Implementation of Group model
  *
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 
 /**
- * User model
+ * Group model
  *
  * @package phpmotpserver
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
-class User extends AppModel {
-    var $validate = array(
-        'username' => array(
-            'rule' => 'email',
-            'message' => 'Must be a valid email address.',
-            'on' => 'create',
-        )
-    );
-
+class Group extends AppModel {
     var $hasMany = array(
         'GroupUser' =>  array(
             'dependent' => true,
