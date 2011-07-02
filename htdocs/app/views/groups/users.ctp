@@ -9,11 +9,17 @@
  */
 ?>
 
+<h2>
+    <?php echo sprintf(__('%s group', true), $group['Group']['name']); ?>
+</h2>
+
 <?php
     echo sprintf(
         __('User who are member of %s:', true),
         $group['Group']['name']
     );
+
+    echo '<br/>';
 
     foreach ($group['User'] as $user) {
         echo ' ';
