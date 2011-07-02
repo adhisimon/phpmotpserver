@@ -15,6 +15,17 @@
     echo sprintf(__('Last database modified was on %s.', true), $user['User']['modified']);
 ?>
 
+<br/><br/>
+<?php
+    echo $this->requestAction(
+        array('controller' => 'users', 'action' => 'groups'),
+        array(
+            'pass' => array($user['User']['id']),
+            'return'
+        )
+    );
+?>
+
 <br/>
 
 <br/>
@@ -39,4 +50,3 @@
         );
     }
 ?>
-
