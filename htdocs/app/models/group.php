@@ -13,7 +13,7 @@
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 class Group extends AppModel {
-    var $hasAndBelongsToManyMany = array(
+    var $hasAndBelongsToMany = array(
         'User'
     );
 }
