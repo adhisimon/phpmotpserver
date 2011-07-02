@@ -159,4 +159,23 @@ class UsersController extends AppController {
         return $user['Group'];
     }
 
+    /**
+     * action to join another group
+     */
+    function joinGroup($id = null) {
+        if (!$this->Auth->User('admin')) {
+            $this->Session->setFlash($this->Auth->authError);
+            $this->redirect('/');
+        }
+
+        if (empty($this->data)) {
+            $this->User->id = $id;
+            $user = $this->User->read();
+            $this->set('user', $user);
+            $this->set('groups', $this->User->Group->find('list'));
+        } else {
+            $this->User->save();
+        }
+    }
+
 }

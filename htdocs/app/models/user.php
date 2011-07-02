@@ -28,4 +28,6 @@ class User extends AppModel {
         'Group'
     );
 
+    var $displayField = 'username';
+
 }

@@ -37,9 +37,8 @@
         echo $html->link(
             __('Join to another group', true),
             array(
-                'controller' => 'groups',
-                'action' => 'join',
-                'user_id' => $user['User']['id']
+                'action' => 'joinGroup',
+                $user['User']['id']
             )
         );
 

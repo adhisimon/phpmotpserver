@@ -106,5 +106,4 @@ class GroupsController extends AppController {
         $this->set('group', $group);
         return $group['User'];
     }
-
 }
