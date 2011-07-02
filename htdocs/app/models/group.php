@@ -13,6 +13,9 @@
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 class Group extends AppModel {
+
+    var $cacheQueries = true;
+
     var $hasAndBelongsToMany = array(
         'User'
     );

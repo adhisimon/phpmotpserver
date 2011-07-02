@@ -13,6 +13,9 @@
  * @author Adhidarma <adhisimon@mondial.co.id>
  */
 class User extends AppModel {
+
+    var $cacheQueries = true;
+
     var $validate = array(
         'username' => array(
             'rule' => 'email',
@@ -24,4 +27,5 @@ class User extends AppModel {
     var $hasAndBelongsToMany = array(
         'Group'
     );
+
 }
