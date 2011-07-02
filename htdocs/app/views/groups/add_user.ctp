@@ -32,3 +32,29 @@
     echo $form->input('user_id');
     echo $form->end('Save');
 ?>
+
+<?php
+    # create a new user
+    echo $html->link(
+        __('Create a new user', true),
+        array(
+            'controller' => 'users',
+            'action' => 'add'
+        )
+    );
+?>
+
+<br/>
+
+<?php
+    # back to group profile
+    echo $html->link(
+        sprintf(__("Back to %s's detail", true), $group['Group']['name']),
+        array(
+            'controller' => 'groups',
+            'action' => 'view',
+            $group['Group']['id']
+        )
+    );
+?>
+
