@@ -31,6 +31,11 @@ class UsersController extends AppController {
      * action to add a new user
      */
     function add() {
+        if (!$this->Auth->User('admin')) {
+            $this->Session->setFlash($this->Auth->authError);
+            $this->redirect('/');
+        }
+
         if (!empty($this->data)) {
             if ($this->User->save($this->data)) {
                 $this->Session->setFlash(__('User added', true));
