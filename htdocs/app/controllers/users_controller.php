@@ -14,11 +14,6 @@
  */
 class UsersController extends AppController {
 
-    var $uses = array(
-        'User',
-        'Group',
-    );
-
     /**
      * action to show index of available users registered on the system
      */
@@ -161,15 +156,7 @@ class UsersController extends AppController {
         $this->User->id = $user_id;
         $user = $this->User->read();
         $this->set('user', $user);
-
-        $this->paginate['recursive'] = -1;
-        $groups = $this->paginate(
-            'Group',
-            array(
-                "Group.id IN (SELECT group_id FROM groups_users WHERE user_id = $user_id)"
-            )
-        );
-        $this->set('groups', $groups);
+        return $user['Group'];
     }
 
 }
