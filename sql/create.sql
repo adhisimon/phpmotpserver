@@ -36,7 +36,7 @@ CREATE TABLE `profiles` (
   `modified` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,4 +82,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-02  4:10:37
+-- Dump completed on 2011-07-02 15:29:44
