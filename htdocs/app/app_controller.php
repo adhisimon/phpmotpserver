@@ -19,4 +19,12 @@ class AppController extends Controller {
      */
     var $components = array('Auth', 'Session');
 
+    function beforeFilter() {
+        parent::beforeFilter();
+
+        if ($this->params['controller'] == 'pages') {
+            $this->Auth->allow('*');
+        }
+    }
+
 }
