@@ -168,14 +168,10 @@ class UsersController extends AppController {
             $this->redirect('/');
         }
 
-        if (empty($this->data)) {
-            $this->User->id = $id;
-            $user = $this->User->read();
-            $this->set('user', $user);
-            $this->set('groups', $this->User->Group->find('list'));
-        } else {
-            $this->User->save();
-        }
+        $this->User->id = $id;
+        $user = $this->User->read();
+        $this->set('user', $user);
+        $this->set('groups', $this->User->Group->find('list'));
     }
 
 }
