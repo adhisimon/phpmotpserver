@@ -6,3 +6,7 @@ REST Web Service and management tools for Mobile One-Time Password (MOTP). MOTP 
 PHP MOTP Server Project aims to provide and implementing MOTP validation as a web service.
 
 WARNING!!!! This project is on initial development stage. Codes are far from complete and hasn't ready to run right.
+
+LICENSE
+-------
+Licensed under GPLv3. See COPYING.txt for more information.
