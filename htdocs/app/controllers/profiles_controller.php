@@ -40,6 +40,17 @@ class ProfilesController extends AppController {
 
         } else {
 
+            # validation
+            $this->Profile->set($this->data);
+            if (!$this->Profile->validates()) {
+                foreach($this->Profile->invalidFields() as $error_message) {
+                    $this->Session->setFlash($error_message);
+                }
+                $this->data = $this->Profile->read();
+                return false;
+            }
+
+            # save
             if ($this->Profile->save($this->data)) {
                 $this->Session->setFlash(__('Data has been saved', true));
                 $this->redirect(array('action' => 'view', $id));
