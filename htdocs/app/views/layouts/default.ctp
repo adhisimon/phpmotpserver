@@ -25,18 +25,35 @@
 		<?php __('PHP MOTP Server:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
-	<?php
-		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+	<?php echo $this->Html->meta('icon'); ?>
 
-		echo $scripts_for_layout;
-	?>
+    <?php echo $this->Html->css(array('cake.generic', 'default')); ?>
+
+    <?php echo $scripts_for_layout; ?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $this->Html->link(__('PHP MOTP Server', true), '/'); ?></h1>
+
+            <div id="linkOnTop">
+                &nbsp;
+
+                <?php
+                    if ($session->check('Auth.User')) {
+                        echo sprintf(__("You've been logged in as %s.", true), $session->read('Auth.User.username'));
+                        echo ' ';
+                        echo $html->link(
+                            __('Logout', true),
+                            array(
+                                'controller' => 'users',
+                                'action' => 'logout',
+                            )
+                        );
+                    }
+                ?>
+            </div>
 		</div>
 		<div id="content">
 

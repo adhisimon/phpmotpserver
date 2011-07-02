@@ -1,0 +1,8 @@
+#linkOnTop {
+    text-align: right;
+    color: white;
+}
+
+#linkOnTop a:link, #linkOnTop a:visited {
+    color: white;
+}
