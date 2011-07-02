@@ -65,7 +65,11 @@ class UsersController extends AppController {
      * action to view a user's detail
      * @params int $id user to view
      */
-    function view($id) {
+    function view($id = null) {
+        if (!$id) {
+            $id = $this->Auth->User('id');
+        }
+
         $this->User->id = $id;
         $this->set('user', $this->User->read());
     }
