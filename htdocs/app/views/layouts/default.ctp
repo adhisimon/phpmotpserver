@@ -43,7 +43,9 @@
                 <?php
                     if ($session->check('Auth.User')) {
                         echo sprintf(__("You've been logged in as %s.", true), $session->read('Auth.User.username'));
+
                         echo ' ';
+
                         echo $html->link(
                             __('Logout', true),
                             array(
@@ -51,6 +53,17 @@
                                 'action' => 'logout',
                             )
                         );
+
+                    } else {
+
+                        echo $html->link(
+                            __('Login', true),
+                            array(
+                                'controller' => 'users',
+                                'action' => 'login',
+                            )
+                        );
+
                     }
                 ?>
             </div>
