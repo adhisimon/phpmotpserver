@@ -96,8 +96,15 @@ class GroupsController extends AppController {
         }
     }
 
-    function members($id) {
-
+    /**
+     * action to show users who are members of a group
+     * @params int $group_id group to show
+     */
+    function users($group_id) {
+        $this->Group->id = $group_id;
+        $group = $this->Group->read();
+        $this->set('group', $group);
+        return $group['User'];
     }
 
 }
