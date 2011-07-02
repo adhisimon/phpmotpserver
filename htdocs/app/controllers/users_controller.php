@@ -14,8 +14,6 @@
  */
 class UsersController extends AppController {
 
-    var $components = array('Auth', 'Session');
-
     /**
      * action to show index of available users registered on the system
      */
