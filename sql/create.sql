@@ -31,7 +31,7 @@ CREATE TABLE `groups` (
   `name` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `apikey` char(36) default NULL,
+  `apikey` char(16) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `apikey` (`apikey`)
@@ -121,4 +121,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-03 13:21:04
+-- Dump completed on 2011-07-03 13:32:23
