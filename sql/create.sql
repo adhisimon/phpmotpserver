@@ -31,8 +31,10 @@ CREATE TABLE `groups` (
   `name` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `apikey` char(36) default NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `apikey` (`apikey`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,4 +121,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-03  2:22:42
+-- Dump completed on 2011-07-03 13:21:04
