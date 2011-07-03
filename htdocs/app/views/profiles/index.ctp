@@ -119,6 +119,18 @@
 <?php echo $this->Paginator->counter(); ?>
 
 <br /><br />
+
+<br />
+<?php
+    if (!empty($this->params['named']['group_id'])) {
+        echo $html->link(
+            __('See all profiles on all groups', true),
+            array('action' => 'index')
+        );
+    }
+?>
+
+<br/>
 <?php
     $add_url = array(
         'action' => 'add'
