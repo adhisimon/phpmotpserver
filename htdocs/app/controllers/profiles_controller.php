@@ -18,8 +18,17 @@ class ProfilesController extends AppController {
     var $uses = array('Profile', 'UsedToken');
 
     function index() {
+
+        # pagination order
+        $this->paginate['order'] = array(
+            'Group.name',
+            'Profile.name',
+        );
+
+        # init conditions
         $conditions = array();
 
+        # is user is an admin?
         if ($this->Auth->User('admin')) {
 
             if (!empty($this->params['named']['group_id'])) {
@@ -70,8 +79,10 @@ class ProfilesController extends AppController {
         } else {
             if ($this->Profile->save($this->data)) {
                 $this->Session->setFlash(__('Profile added', true));
-                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Failed to create profile', true));
             }
+            $this->redirect(array('action' => 'index'));
         }
     }
 
