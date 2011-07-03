@@ -7,7 +7,17 @@
  */
 ?>
 
-<h2><?php echo __('List of Profiles', true); ?></h2>
+<h2>
+
+<?php
+    if (empty($this->params['named']['group_id'])) {
+        echo __('List of Profiles', true);
+    } else {
+        echo sprintf(__('List of Profiles on %s group', true), $group_name);
+    }
+?>
+
+</h2>
 
 <table>
     <tr>

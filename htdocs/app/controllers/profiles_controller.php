@@ -38,6 +38,11 @@ class ProfilesController extends AppController {
             $conditions['group_id'] = $groups;
         }
 
+        if (!empty($this->params['named']['group_id'])) {
+            $group_name = $this->Profile->Group->field('Group.name', array('Group.id' => $this->params['named']['group_id']));
+            $this->set('group_name', $group_name);
+        }
+
         $profiles = $this->paginate('Profile', $conditions);
         $this->set(compact('profiles'));
     }
