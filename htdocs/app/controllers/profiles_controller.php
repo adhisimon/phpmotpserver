@@ -140,6 +140,16 @@ class ProfilesController extends AppController {
      */
     function validator() {
 
+        if (!empty($this->params['named']['apikey'])) {
+            $apikey = $this->params['named']['apikey'];
+        } else {
+            $apikey = '';
+        }
+
+        if (empty($this->params['named']['username'])) {
+            $apikey = $this->Profile->Group->field('apikey', array('Group.apikey' => $apikey));
+        }
+
         # first, run garbage collector
         $this->UsedToken->garbageCollector();
 
@@ -162,8 +172,10 @@ class ProfilesController extends AppController {
         }
 
         if (!empty($this->params['named']['username'])) {
-            $this->Profile->recursive = -1;
-            $profile = $this->Profile->findByName($this->params['named']['username']);
+            //$this->Profile->recursive = -1;
+            $conditions['Group.apikey'] = $apikey;
+            $conditions['Profile.name'] = $this->params['named']['username'];
+            $profile = $this->Profile->find('first', array('conditions' => $conditions));
         } else {
             $profile = array();
         }
@@ -193,7 +205,7 @@ class ProfilesController extends AppController {
         }
 
         # check if we've been called rightly
-        if (empty($secret) or empty($pin) or empty($otp)) {
+        if (empty($apikey) or empty($secret) or empty($pin) or empty($otp)) {
             $this->set('show_help', true);
         }
 
@@ -203,7 +215,11 @@ class ProfilesController extends AppController {
         if ($result) {
             // store otp to UsedToken so it can only be used one time
             $this->UsedToken->create();
-            $this->UsedToken->saveField('name', $otp);
+            #$this->UsedToken->saveField('name', $otp);
+
+            $data['UsedToken']['name'] = $otp;
+            $data['UsedToken']['apikey'] = $apikey;
+            $this->UsedToken->save($data);
         }
 
         $this->set('result', $result);

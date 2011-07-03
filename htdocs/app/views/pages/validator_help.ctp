@@ -10,13 +10,17 @@ $controller_and_action = $this->Html->url(array('controller' => 'profiles', 'act
 ?>
 <h2><?php echo __('Usage:', true); ?> </h2>
 
-<strong>http://<?php echo $_SERVER['SERVER_NAME'] . $controller_and_action; ?>/username:USERNAME/secret:SECRET/pin:PIN/offset:OFFSET/otp:OTP</strong>
+<strong>http://<?php echo $_SERVER['SERVER_NAME'] . $controller_and_action; ?>/apikey:APIKEY/username:USERNAME/secret:SECRET/pin:PIN/offset:OFFSET/otp:OTP</strong>
 
 <br/><br/>
 
 <h3>Parameter Description:</h3>
 
 <ul>
+    <li>
+        <strong>apikey:</strong>
+        <?php echo __('group apikey (MANDATORY)', true); ?>
+    </li>
     <li>
         <strong>username:</strong>
         <?php echo __('user profile on database (OPTIONAL), e.g.: abc@xyz.com, used to load default value from profile if some optional parameters did not specified', true); ?>

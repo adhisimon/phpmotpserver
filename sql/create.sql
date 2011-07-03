@@ -88,8 +88,10 @@ DROP TABLE IF EXISTS `used_tokens`;
 CREATE TABLE `used_tokens` (
   `name` char(6) NOT NULL,
   `created` datetime NOT NULL,
+  `apikey` varchar(16) NOT NULL,
   PRIMARY KEY  (`name`),
-  KEY `created` (`created`)
+  KEY `created` (`created`),
+  KEY `apikey` (`apikey`)
 ) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -121,4 +123,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-03 14:18:43
+-- Dump completed on 2011-07-03 15:28:09
