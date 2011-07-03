@@ -127,6 +127,7 @@ class ProfilesController extends AppController {
         }
 
         if (!empty($this->params['named']['username'])) {
+            $this->Profile->recursive = -1;
             $profile = $this->Profile->findByName($this->params['named']['username']);
         } else {
             $profile = array();
