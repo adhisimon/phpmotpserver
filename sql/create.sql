@@ -73,8 +73,7 @@ CREATE TABLE `profiles` (
   `modified` datetime NOT NULL,
   `group_id` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `group_id` (`group_id`,`name`)
+  UNIQUE KEY `group_id` (`group_id`,`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,4 +122,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-03 15:28:09
+-- Dump completed on 2011-07-03 22:18:29
