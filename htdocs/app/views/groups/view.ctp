@@ -46,6 +46,16 @@
     echo "<br/><br/>";
     $profiles_count = count($group['Profile']);
     echo sprintf(__n('This group has %d profile.', 'This group has %d profiles.', $profiles_count, true), $profiles_count);
+
+    echo '<br/>';
+    echo $html->link(
+        __('View list of related OTP Profiles', true),
+        array(
+            'controller' => 'profiles',
+            'action' => 'index',
+            'group_id' => $group['Group']['id']
+        )
+    );
 ?>
 
 <br/>
@@ -56,18 +66,6 @@
         __('Back to list of groups', true),
         array(
             'action' => 'index'
-        )
-    );
-?>
-
-<?php
-    echo '<br/>';
-    echo $html->link(
-        __('View list of related OTP Profiles', true),
-        array(
-            'controller' => 'profiles',
-            'action' => 'index',
-            'group_id' => $group['Group']['id']
         )
     );
 ?>

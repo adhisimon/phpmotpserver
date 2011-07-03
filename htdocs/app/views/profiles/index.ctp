@@ -110,10 +110,15 @@
 
 <br /><br />
 <?php
+    $add_url = array(
+        'action' => 'add'
+    );
+
+    if (!empty($this->params['named']['group_id'])) {
+        $add_url['group_id'] = $this->params['named']['group_id'];
+    }
     echo $html->link(
         __('Add a new profile', true),
-        array(
-            'action' => 'add'
-        )
+        $add_url
     );
 ?>

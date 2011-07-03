@@ -18,18 +18,25 @@ class ProfilesController extends AppController {
     var $uses = array('Profile', 'UsedToken');
 
     function index() {
-        $user_id = $this->Auth->User('id');
-        $_groups = $this->requestAction("/users/groupsList/$user_id");
+        $conditions = array();
 
-        foreach ($_groups as $group_id => $group) {
-            $groups[] = $group_id;
+        if ($this->Auth->User('admin')) {
+
+            if (!empty($this->params['named']['group_id'])) {
+                $conditions['group_id'] = $this->params['named']['group_id'];
+            }
+
+        } else {
+            $user_id = $this->Auth->User('id');
+
+            $groups = array_keys($this->requestAction("/users/groupsList/$user_id"));
+
+            if (!empty($this->params['named']['group_id'])) {
+                $groups = array_intersect($groups, array($this->params['named']['group_id']));
+            }
+
+            $conditions['group_id'] = $groups;
         }
-
-        if (!empty($this->params['named']['group_id'])) {
-            $groups = array_intersect($groups, array($this->params['named']['group_id']));
-        }
-
-        $conditions['group_id'] = $groups;
 
         $profiles = $this->paginate('Profile', $conditions);
         $this->set(compact('profiles'));
@@ -39,9 +46,21 @@ class ProfilesController extends AppController {
 
         if (empty($this->data)) {
 
-            $user_id = $this->Auth->User('id');
-            $groups = $this->requestAction("/users/groupsList/$user_id");
+            if ($this->Auth->User('admin')) {
+
+                $groups = $this->Profile->Group->find('list');
+
+            } else {
+
+                $user_id = $this->Auth->User('id');
+                $groups = $this->requestAction("/users/groupsList/$user_id");
+
+            }
             $this->set('groups', $groups);
+
+            if (!empty($this->params['named']['group_id'])) {
+                $this->set('group_id', $this->params['named']['group_id']);
+            }
 
         } else {
             if ($this->Profile->save($this->data)) {
@@ -58,10 +77,21 @@ class ProfilesController extends AppController {
 
             $this->data = $this->Profile->read();
 
-            $user_id = $this->Auth->User('id');
-            $groups = $this->requestAction("/users/groupsList/$user_id");
+            if ($this->Auth->User('admin')) {
+
+                $groups = $this->Profile->Group->find('list');
+
+            } else {
+
+                $user_id = $this->Auth->User('id');
+                $groups = $this->requestAction("/users/groupsList/$user_id");
+
+            }
             $this->set('groups', $groups);
 
+            if (!empty($this->params['named']['group_id'])) {
+                $this->set('group_id', $this->params['named']['group_id']);
+            }
 
         } else {
 
