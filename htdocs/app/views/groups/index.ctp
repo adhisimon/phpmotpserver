@@ -12,6 +12,7 @@
 <table>
     <tr>
         <th><?php echo $this->Paginator->sort(__('Name', true), 'Group.name'); ?></th>
+        <th><?php echo $this->Paginator->sort(__('APIKEY', true), 'Group.apikey'); ?></th>
         <th><?php echo $this->Paginator->sort(__('Created', true), 'Group.created'); ?></th>
         <th>&nbsp;</th>
     </tr>
@@ -29,9 +30,18 @@
                         $group['Group']['id']
                     )
                 );
+
+                $member_count = count($group['User']);
+                echo "<br/>";
+                echo sprintf(__n('%d user', '%d users', $member_count, true), $member_count);
+
+                $profile_count = count($group['Profile']);
+                echo "<br/>";
+                echo sprintf(__n('%d profile', '%d profiles', $profile_count, true), $profile_count);
             ?>
 
         </td>
+        <td><?php echo $group['Group']['apikey']; ?></td>
         <td><?php echo $group['Group']['created']; ?></td>
 
         <td>

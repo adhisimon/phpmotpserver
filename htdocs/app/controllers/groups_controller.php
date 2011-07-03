@@ -50,6 +50,11 @@ class GroupsController extends AppController {
         }
 
         if (!empty($this->data)) {
+
+            # generate new apikey
+            $this->data['Group']['apikey'] = sha1(time() . Configure::read('Security.cipherSeed'));
+
+            # save the data
             if ($this->Group->save($this->data)) {
                 $this->Session->setFlash(__('Group added', true));
                 $this->redirect(array('action' => 'index'));
@@ -147,6 +152,37 @@ class GroupsController extends AppController {
         $group = $this->Group->read();
         $this->set('group', $group);
         $this->set('users', $this->Group->User->find('list'));
+    }
+
+    /**
+     * action to check if a user is a member of a group
+     * @params int $group_id group to check
+     * @params int $user_id user to check
+     */
+    function isMember($group_id, $user_id) {
+        $groups = $this->usersList($group_id);
+        return array_key_exists($user_id, $groups);
+    }
+
+    /**
+     * function to reset apikey
+     * @params int $id group to reset
+     */
+    function resetApikey($id) {
+        $user_id = $this->Auth->User('id');
+        if (!$this->Auth->User('admin') and !$this->isMember($id, $user_id)) {
+            $this->Session->setFlash($this->Auth->authError);
+            $this->redirect('/');
+        }
+
+        $this->Group->id = $id;
+        $this->Group->saveField(
+            'apikey',
+            sha1($id . time() . Configure::read('Security.cipherSeed'))
+        );
+
+        $this->Session->setFlash(__('APIKEY has been resetted', true));
+        $this->redirect(array('action' => 'view', $id));
     }
 
 }

@@ -26,7 +26,30 @@
     );
 ?>
 
+<?php
+    echo '<br/><br/>';
+    echo 'APIKEY: ' . $group['Group']['apikey'];
+    echo '<br/>';
+    echo $html->link(
+        __('Reset APIKEY', true),
+        array(
+            'action' => 'resetApikey',
+            $group['Group']['id']
+        ),
+        array(),
+        __('Are you sure you want to reset APIKEY for this group?', true)
+    );
+?>
+
+
+<?php
+    echo "<br/><br/>";
+    $profiles_count = count($group['Profile']);
+    echo sprintf(__n('This group has %d profile.', 'This group has %d profiles.', $profiles_count, true), $profiles_count);
+?>
+
 <br/>
+
 <?php
     echo '<br/>';
     echo $html->link(
