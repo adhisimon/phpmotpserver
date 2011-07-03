@@ -58,18 +58,20 @@
 
                 echo ' ';
 
-                echo $html->link(
-                    __('Delete', true),
-                    array(
-                        'action' => 'delete',
-                        $group['Group']['id']
-                    ),
-                    array(),
-                    sprintf(
-                        __('Are you sure you want to delete "%s"?', true),
-                        $group['Group']['name']
-                    )
-                );
+                if ($session->read('Auth.User.admin')) {
+                    echo $html->link(
+                        __('Delete', true),
+                        array(
+                            'action' => 'delete',
+                            $group['Group']['id']
+                        ),
+                        array(),
+                        sprintf(
+                            __('Are you sure you want to delete "%s"?', true),
+                            $group['Group']['name']
+                        )
+                    );
+                }
 
             ?>
 
