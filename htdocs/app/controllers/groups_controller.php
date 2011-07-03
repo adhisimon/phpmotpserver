@@ -18,12 +18,25 @@ class GroupsController extends AppController {
      * action to show list of groups
      */
     function index() {
+
+        # limit groups to show if user is not an admin
         if (!$this->Auth->User('admin')) {
-            $this->Session->setFlash($this->Auth->authError);
-            $this->redirect('/');
+            $groups_to_show = $this->requestAction(
+                array(
+                    'controller' => 'users',
+                    'action' => 'groupsList',
+                    'pass' => array(
+                        $this->Auth->User('id')
+                    )
+                )
+            );
+            $conditions['Group.id'] = array_keys($groups_to_show);
+        } else {
+            $conditions = array();
         }
 
-        $groups = $this->paginate('Group');
+
+        $groups = $this->paginate('Group', $conditions);
         $this->set(compact('groups'));
     }
 
@@ -57,8 +70,14 @@ class GroupsController extends AppController {
      */
     function view($id) {
         if (!$this->Auth->User('admin')) {
-            $this->Session->setFlash($this->Auth->authError);
-            $this->redirect('/');
+
+            $users = $this->usersList($id);
+
+            if (!isset($users[$this->Auth->User('id')])) {
+                $this->Session->setFlash($this->Auth->authError);
+                $this->redirect('/');
+            }
+
         }
 
         $this->Group->id = $id;
@@ -105,6 +124,14 @@ class GroupsController extends AppController {
         $group = $this->Group->read();
         $this->set('group', $group);
         return $group['User'];
+    }
+
+    function usersList($group_id) {
+        $users = $this->users($group_id);
+        foreach ($users as $user) {
+            $retval[$user['id']] = $user['username'];
+        }
+        return $retval;
     }
 
     /**

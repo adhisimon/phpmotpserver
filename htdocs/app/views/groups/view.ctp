@@ -26,16 +26,15 @@
     );
 ?>
 
+<br/>
 <?php
-    if ($session->read('Auth.User.admin')) {
-        echo '<br/>';
-        echo $html->link(
-            __('Back to list of groups', true),
-            array(
-                'action' => 'index'
-            )
-        );
-    }
+    echo '<br/>';
+    echo $html->link(
+        __('Back to list of groups', true),
+        array(
+            'action' => 'index'
+        )
+    );
 ?>
 
 <?php
