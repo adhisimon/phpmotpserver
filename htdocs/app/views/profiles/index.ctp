@@ -128,7 +128,7 @@
         $add_url['group_id'] = $this->params['named']['group_id'];
     }
     echo $html->link(
-        __('Add a new profile', true),
+        __('Create new profile', true),
         $add_url
     );
 ?>
